@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
+  return { title: "Orbidity" };
 };
 
 export default function App() {

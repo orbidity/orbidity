@@ -13,7 +13,6 @@ const Layout = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Noto Sans', sans-serif;
 
   & > div {
     border-right: #555 solid 1px;
