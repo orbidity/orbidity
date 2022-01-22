@@ -6,9 +6,9 @@ import { faNetworkWired, faPlay, faFlagCheckered } from '@fortawesome/free-solid
 const Run = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: ${({theme}) => theme.colors.backgroundColor};
   padding: 1rem;
-  color: #fff;
+  color: ${({theme}) => theme.colors.textColor};
 
   display: flex;
   justify-content: center;
@@ -17,12 +17,12 @@ const Run = styled.div`
   .run-action {
     padding: 1rem 3rem;
     font-size: 2rem;
-    color: #ccc;
+    color: ${({theme}) => theme.colors.contrastColor};
     cursor: pointer;
     text-align: center;
 
     &:hover {
-      color: #fff;
+      color: ${({theme}) => theme.colors.textColor};
     }
 
     p {

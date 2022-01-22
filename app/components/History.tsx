@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const Hist = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #333;
+  background-color: ${({theme}) => theme.colors.backgroundColor};
   padding: 1rem;
-  color: #fff;
+  color: ${({theme}) => theme.colors.textColor};
 `;
 
 

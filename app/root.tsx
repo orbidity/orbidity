@@ -9,6 +9,7 @@ import {
 import type { MetaFunction } from "remix";
 
 import { createGlobalStyle } from "styled-components";
+import { ColorProvider } from "./contexts/color";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -41,10 +42,12 @@ export default function App() {
           : null}
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <ColorProvider>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === "development" && <LiveReload />}
+        </ColorProvider>
       </body>
     </html>
   );
