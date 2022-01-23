@@ -48,6 +48,7 @@ export default function App() {
           <Scripts />
           {process.env.NODE_ENV === "development" && <LiveReload />}
         </ColorProvider>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
       </body>
     </html>
   );
