@@ -441,7 +441,7 @@ const Index = () => {
       {loading && <img src={spinner} />}
       {success && <>
         <h2>Success!</h2>
-        <Link to={'/app/tictactoe'} className='btn' onClick={openMetamask}>Continue to app now you have tokens!</Link>
+        <Link to={'/app/tutorial'} className='btn' onClick={openMetamask}>Continue to app now you have tokens and start the tutorial!</Link>
       </>}
     </GibOrbs>
   </>

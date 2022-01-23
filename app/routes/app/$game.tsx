@@ -9,6 +9,14 @@ import TicTacToe from '~/components/games/TicTacToe';
 import Blackjack from '~/components/games/Blackjack';
 import History from '~/components/History';
 
+// Tutorial components
+import TutorialIntroModal from '~/components/tutorial/tut1';
+import Tutorial2 from '~/components/tutorial/tut2';
+import Tutorial3 from '~/components/tutorial/tut3';
+import Tutorial4 from '~/components/tutorial/tut4';
+import Tutorial5 from '~/components/tutorial/tut5';
+import Tutorial6 from '~/components/tutorial/tut6';
+
 import { useColor } from '~/contexts/color';
 import {useEffect, useState} from 'react';
 
@@ -95,6 +103,12 @@ const Index = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      { game === "tutorial" && <TutorialIntroModal /> }
+      { game === "tutorial2" && <Tutorial2 /> }
+      { game === "tutorial3" && <Tutorial3 /> }
+      { game === "tutorial4" && <Tutorial4 /> }
+      { game === "tutorial5" && <Tutorial5 /> }
+      { game === "tutorial6" && <Tutorial6 /> }
       <Layout>
         <Sidebar />
         <div id="code">
@@ -107,7 +121,7 @@ const Index = () => {
             game === 'tictactoe' && <TicTacToe moveHistory={ticTacToeMoveHistory} />
           }
           {
-            game === 'blackjack' && <Blackjack />
+            game !== 'tictactoe' && <Blackjack />
           }
           <History />
         </div>

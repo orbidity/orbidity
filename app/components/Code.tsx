@@ -7,6 +7,7 @@ import { ITheme } from '~/theme/themes';
 const CodeWrapper = styled.div`
   width: 100%;
   height: 100%;
+  z-index: 20;
   background-color: ${({theme}) => theme.colors.backgroundColor};
 `;
 
