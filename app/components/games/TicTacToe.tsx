@@ -107,20 +107,9 @@ const GameBoard = styled.div`
   }
 `;
 
-const exampleGame = [
-  [0,0,0,0,0,0,0,0,0],
-  [1,0,0,0,0,0,0,0,0],
-  [1,2,0,0,0,0,0,0,0],
-  [1,2,1,0,0,0,0,0,0],
-  [1,2,1,2,0,0,0,0,0],
-  [1,2,1,2,1,0,0,0,0],
-  [1,2,1,2,1,2,0,0,0],
-  [1,2,1,2,1,2,1,0,0]
-]
-
 interface IBoard {
   gameState: number[];
-} 
+}
 
 const Board: React.FC<IBoard> = ({gameState}) => {
   return <>
@@ -143,8 +132,11 @@ const Board: React.FC<IBoard> = ({gameState}) => {
   </>
 }
 
-const TicTacToe = () => {
-  const [moveHistory, setMoveHistory] = useState<number[][]>(exampleGame);
+interface TicTacToeProps {
+  moveHistory: number[][];
+}
+
+const TicTacToe = ({ moveHistory }: TicTacToeProps) => {
   const [currentMove, setCurrentMove] = useState(0);
   const [gameState, setGameState] = useState<number[]>([]);
 
@@ -153,6 +145,10 @@ const TicTacToe = () => {
   useEffect(() => {
     setGameState(moveHistory[currentMove]);
   }, [currentMove]);
+  useEffect(() => {
+    // Show first move whenever game history changes
+    setCurrentMove(moveHistory.length > 1 ? 1 : 0);
+  }, [moveHistory]);
 
   const nextMove = () => {
     if (currentMove < moveHistory.length - 1) {
@@ -193,7 +189,7 @@ const TicTacToe = () => {
       </div>
       <PlayControls>
         <a onClick={() => setCurrentMove(0)}><FontAwesomeIcon icon={faStepBackward} /></a>
-            
+
         <input
           type="range"
           min="0"

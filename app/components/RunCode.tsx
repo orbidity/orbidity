@@ -33,10 +33,14 @@ const Run = styled.div`
   }
 `;
 
-const RunCode = () => {
+interface RunCodeProps {
+    onRunLocally?(): void;
+}
+
+const RunCode = ({ onRunLocally }: RunCodeProps) => {
   return (
     <Run>
-      <div className="run-action">
+      <div className="run-action" onClick={onRunLocally}>
         <FontAwesomeIcon icon={ faPlay } />
         <p>Run Locally</p>
       </div>
