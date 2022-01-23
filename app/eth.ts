@@ -22,3 +22,9 @@ export function runCodeLocally(code: string, game: string): Promise<any[]> {
         worker.postMessage({ type: "simulate", id, code, game });
     });
 }
+
+export function subscribe(callback: (event: any) => void) {
+    worker.addEventListener("message", (event) => {
+        callback(event.data);
+    });
+}

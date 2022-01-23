@@ -10,6 +10,7 @@ import type { MetaFunction } from "remix";
 
 import { createGlobalStyle } from "styled-components";
 import { ColorProvider } from "./contexts/color";
+import { TxnProvider } from "./contexts/txns";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -31,7 +32,7 @@ export default function App() {
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" /> 
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
@@ -43,10 +44,12 @@ export default function App() {
       </head>
       <body>
         <ColorProvider>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === "development" && <LiveReload />}
+          <TxnProvider>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            {process.env.NODE_ENV === "development" && <LiveReload />}
+          </TxnProvider>
         </ColorProvider>
         <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
       </body>

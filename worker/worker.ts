@@ -99,7 +99,10 @@ async function deployContract(
   // Deploy contract to local Ethereum network
   return new web3.eth.Contract(contract.abi)
     .deploy({ data: contract.bytecode, arguments: args })
-    .send({ from: account, gas: 10000000 });
+    .send({ from: account, gas: 10000000 })
+    .once("receipt", (receipt) => {
+      postMessage({ type: "transaction", receipt })
+    });
 }
 
 // Add subscriptions
@@ -210,6 +213,7 @@ addEventListener("message", async (event: MessageEvent<Payload>) => {
         customStrategyContract.options.address,
       ])
       .send({ from: accounts[0], gas: 10000000 });
+    postMessage({ type: "transaction", receipt: txn });
 
     // Extract game states from each turn
     const events: string[][] = txn.events["State_event"].map(
