@@ -10,7 +10,13 @@ const CodeWrapper = styled.div`
   background-color: ${({theme}) => theme.colors.backgroundColor};
 `;
 
-const Code = () => {
+interface CodeProps {
+    defaultValue?: string;
+    onChange?: (value?: string) => void;
+}
+
+
+const Code = ({ defaultValue, onChange }: CodeProps) => {
   const theme: any = useTheme();
 
   return (
@@ -18,8 +24,9 @@ const Code = () => {
       <Editor
         height="100%"
         defaultLanguage="sol"
-        defaultValue="// some comment"
+        defaultValue={defaultValue}
         theme={theme.editorTheme}
+        onChange={onChange}
       />
     </CodeWrapper>
   );

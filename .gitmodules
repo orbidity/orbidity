@@ -1,0 +1,3 @@
+[submodule "worker/eth"]
+	path = worker/eth
+	url = https://github.com/orbidity/eth.git
