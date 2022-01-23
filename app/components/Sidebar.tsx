@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
 
-import Themes from './../theme/themes';
-import { useColor } from './../contexts/color';
+import Themes from '~/theme/themes';
+import { useColor } from '~/contexts/color';
 
 const Side = styled.div`
   width: 100%;

@@ -5,10 +5,13 @@ export interface ITheme {
     backgroundColor: string;
     borderColor: string;
     contrastColor: string;
+    lightColor: string,
     textColor: string;
     accents: {
       primary: string;
       secondary: string;
+      winner: string;
+      loser: string;
     }
   }
 }
@@ -20,10 +23,13 @@ const dark: ITheme = {
     backgroundColor: '#333',
     borderColor: '#555',
     contrastColor: '#ccc',
+    lightColor: '#eee',
     textColor: '#fff',
     accents: {
       primary: '#FF7F45',
-      secondary: '#41B4FF'
+      secondary: '#41B4FF',
+      winner: '#00ff00',
+      loser: '#ff0000',
     }
   }
 }
@@ -35,10 +41,13 @@ const light: ITheme = {
     backgroundColor: '#eee',
     borderColor: '#444',
     contrastColor: '#777',
+    lightColor: '#eee',
     textColor: '#333',
     accents: {
       primary: '#FF7F45',
-      secondary: '#41B4FF'
+      secondary: '#41B4FF',
+      winner: '#00ff00',
+      loser: '#ff0000',
     }
   }
 }

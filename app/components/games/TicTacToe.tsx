@@ -2,7 +2,7 @@ import react, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faPause, faPlay, faStepBackward, faStepForward } from '@fortawesome/free-solid-svg-icons';
 import { faCircle } from '@fortawesome/free-regular-svg-icons'
 
 const Tic = styled.div`
@@ -15,25 +15,52 @@ const Tic = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
-  & > a {
-    color: ${({theme}) => theme.colors.textColor};
-    text-decoration: none;
-    font-size: 2rem;
-    margin: 3rem;
-    cursor: pointer;
+  & > .game {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &.disabled {
-      cursor: not-allowed;
-      
+    & > a {
+      color: ${({theme}) => theme.colors.textColor};
+      text-decoration: none;
+      font-size: 2rem;
+      margin: 3rem;
+      cursor: pointer;
+
+      &.disabled {
+        cursor: not-allowed;
+        
+        &:hover {
+          color: ${({theme}) => theme.colors.contrastColor};
+        }
+      }
+
       &:hover {
-        color: ${({theme}) => theme.colors.contrastColor};
+        color: ${({theme}) => theme.colors.textColor};
       }
     }
+  }
+`;
+
+const PlayControls = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  width: 70%;
+
+  & > a {
+    margin: 0 1rem;
+    color: ${({theme}) => theme.colors.textColor};
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1rem;
 
     &:hover {
-      color: ${({theme}) => theme.colors.textColor};
-    }
+      color: ${({theme}) => theme.colors.contrastColor};
   }
 `;
 
@@ -121,6 +148,8 @@ const TicTacToe = () => {
   const [currentMove, setCurrentMove] = useState(0);
   const [gameState, setGameState] = useState<number[]>([]);
 
+  const [playing, setPlaying] = useState(false);
+
   useEffect(() => {
     setGameState(moveHistory[currentMove]);
   }, [currentMove]);
@@ -137,15 +166,49 @@ const TicTacToe = () => {
     }
   }
 
+  useEffect(() => {
+    if (playing) {
+      var interval = setInterval(() => {
+        if (currentMove < moveHistory.length - 1) {
+          setCurrentMove(currentMove + 1);
+        } else {
+          setPlaying(false);
+          clearInterval(interval);
+        }
+      }, 500);
+    }
+    return () => clearInterval(interval);
+  }, [playing, currentMove]);
+
   return (
     <Tic>
-      <a className={currentMove === 0 ? 'disabled' : ''} onClick={() => prevMove()}>
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </a>
-      <Board gameState={gameState} />
-      <a className={currentMove === moveHistory.length - 1 ? 'disabled' : ''} onClick={() => nextMove()}>
-        <FontAwesomeIcon icon={faAngleRight} />
-      </a>
+      <div className='game'>
+        <a className={currentMove === 0 ? 'disabled' : ''} onClick={() => prevMove()}>
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </a>
+        <Board gameState={gameState} />
+        <a className={currentMove === moveHistory.length - 1 ? 'disabled' : ''} onClick={() => nextMove()}>
+          <FontAwesomeIcon icon={faAngleRight} />
+        </a>
+      </div>
+      <PlayControls>
+        <a onClick={() => setCurrentMove(0)}><FontAwesomeIcon icon={faStepBackward} /></a>
+            
+        <input
+          type="range"
+          min="0"
+          max={moveHistory.length - 1}
+          value={currentMove}
+          onChange={(e) => setCurrentMove(e.target.valueAsNumber)}
+        />
+        {
+          playing ?
+            <a onClick={() => setPlaying(false)}><FontAwesomeIcon icon={faPause} /></a> :
+            <a onClick={() => setPlaying(true)}><FontAwesomeIcon icon={faPlay} /></a>
+        }
+
+        <a onClick={() => setCurrentMove(moveHistory.length - 1)}><FontAwesomeIcon icon={faStepForward} /></a>
+      </PlayControls>
     </Tic>
   );
 }
