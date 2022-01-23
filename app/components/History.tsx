@@ -58,8 +58,8 @@ const History = () => {
                 const cls = value.from ? "" : "in-progress";
                 return <React.Fragment key={value.hash}>
                     <p className={cls}><FontAwesomeIcon icon={faDatabase} /><b> {value.hash}</b></p>
-                    <p className={cls}><FontAwesomeIcon icon={faUserCheck} /> {value.from}</p>
-                    <p className={cls}><FontAwesomeIcon icon={faGasPump} /> {value.gasUsed} G</p>
+                    <p className={cls}>{value.from && <FontAwesomeIcon icon={faUserCheck} />} {value.from}</p>
+                    <p className={cls}>{value.gasUsed && <FontAwesomeIcon icon={faGasPump} />} {value.gasUsed} G</p>
                     {value.events?.length ?
                         <ul>
                             {value.events.map((event, i) => {
